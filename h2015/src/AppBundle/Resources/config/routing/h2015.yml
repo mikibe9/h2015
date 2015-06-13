@@ -27,3 +27,16 @@ h2015_remove_from_basket:
   defaults: { _controller: AppBundle:Default:addToBasket}
   options:
     expose: true
+      expose: true
+
+h2015_wishlist_add:
+    path: /wishlist-add
+    defaults: { _controller: AppBundle:Default:wishlistAdd}
+    options:
+      expose: true
+
+h2015_wishlist_remove:
+    path: /wishlist-remove
+    defaults: { _controller: AppBundle:Default:wishlistRemove}
+    options:
+      expose: true

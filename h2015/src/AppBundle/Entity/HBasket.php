@@ -13,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class HBasket
 {
     const REPOSITORY = 'AppBundle:HBascket';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
+    const STATUS_DELETED = 'deleted';
 
     /**
      * @var integer
@@ -40,12 +43,17 @@ class HBasket
      */
     private $hProducts;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", nullable=false)
+     */
+    private $status;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,6 +64,7 @@ class HBasket
      * Set quantity
      *
      * @param integer $quantity
+     *
      * @return HBasket
      */
     public function setQuantity($quantity)
@@ -68,7 +77,7 @@ class HBasket
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity()
     {
@@ -79,6 +88,7 @@ class HBasket
      * Set hProducts
      *
      * @param \AppBundle\Entity\HProducts $hProducts
+     *
      * @return HBasket
      */
     public function setHProducts(\AppBundle\Entity\HProducts $hProducts = null)
@@ -91,10 +101,26 @@ class HBasket
     /**
      * Get hProducts
      *
-     * @return \AppBundle\Entity\HProducts 
+     * @return \AppBundle\Entity\HProducts
      */
     public function getHProducts()
     {
         return $this->hProducts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

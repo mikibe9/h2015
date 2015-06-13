@@ -8,6 +8,7 @@ use AppBundle\Entity\HWishlist;
 use AppBundle\Repository\HBasketRepository;
 use AppBundle\Repository\HProductsRepository;
 use AppBundle\Repository\HWishlistRepository;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -114,7 +115,7 @@ class DefaultController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         /** @var HBasketRepository $basketRepo */
         $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
-        $basketProducts = $basketRepo->findAll();
+        $basketProducts = $basketRepo->findBy(array('status' => HBasket::STATUS_ACTIVE));
         $results        = array();
 
         if (count($basketProducts) > 0) {
@@ -135,6 +136,7 @@ class DefaultController extends Controller
                     ),
                     "quantity" => $basketProduct->getQuantity()
                 );
+                $totalPrice = $basketProduct->getQuantity();
             }
 
         }
@@ -151,15 +153,94 @@ class DefaultController extends Controller
         return new JsonResponse($results);
     }
 
+    public function wishlistAddAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $wish         = $wishlistRepo->findBy(array('hProducts' => $productId));
+        if ($wish instanceof HWishlist) {
+            return true;
+        } else {
+            /** @var HProductsRepository $productsRepo */
+            $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+            /** @var HProducts $product */
+            $product = $productsRepo->find($productId);
+            $wish    = new HWishlist();
+            $wish->setOrder(0);
+            $wish->setHProducts($product);
+            $wish->setEstimatedPurchase("");
+            $wish->setStatus('active');
+
+            $entityManager->persist($wish);
+            $entityManager->flush();
+        }
+
+    }
+
+    public function wishlistRemoveAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $wish         = $wishlistRepo->findOneBy(array('hProducts' => $productId));
+        if ($wish instanceof HWishlist) {
+            $entityManager->remove($wish);
+            $entityManager->flush();
+        }
+    }
+
     public function addToBasketAction(Request $request)
     {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
         /** @var HBasketRepository $basketRepo */
-        $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
+        $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
+        $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+        if ($basket instanceof HBasket) {
+            $basket->setQuantity($basket->getQuantity() + 1);
+        } else {
+            /** @var HProductsRepository $productsRepo */
+            $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+            /** @var HProducts $product */
+            $product = $productsRepo->find($productId);
+
+            $basket = new HBasket();
+            $basket->setHProducts($product);
+            $basket->setQuantity(1);
+        }
+        $entityManager->persist($basket);
+        $entityManager->flush();
+
+        return new JsonResponse($basket);
     }
 
     public function removeFromBasketAction(Request $request)
     {
-        //TODO
+        $productId = $request->request->get('product_id');
+
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+
+        /** @var HBasketRepository $basketRepo */
+        $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
+        $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+
+        if ($basket instanceof HBasket) {
+            if (($basket->getQuantity() - 1) == 0) {
+                $basket->setStatus(HBasket::STATUS_DELETED);
+            } else {
+                $basket->setQuantity($basket->getQuantity() - 1);
+            }
+            $entityManager->persist($basket);
+            $entityManager->flush();
+        }
+
+        return new JsonResponse($basket);
     }
 }
