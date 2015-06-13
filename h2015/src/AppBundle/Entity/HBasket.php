@@ -8,11 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
  * HBasket
  *
  * @ORM\Table(name="h_basket", indexes={@ORM\Index(name="fk_h_basket_h_products1_idx", columns={"h_products_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\HBasketRepository")
  */
 class HBasket
 {
-    const REPOSITORY = 'AppBundle:HBascket';
+    const REPOSITORY = 'AppBundle:HBasket';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
+    const STATUS_DELETED = 'deleted';
 
     /**
      * @var integer
@@ -40,12 +43,17 @@ class HBasket
      */
     private $hProducts;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", nullable=false)
+     */
+    private $status;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,6 +64,7 @@ class HBasket
      * Set quantity
      *
      * @param integer $quantity
+     *
      * @return HBasket
      */
     public function setQuantity($quantity)
@@ -68,7 +77,7 @@ class HBasket
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity()
     {
@@ -79,6 +88,7 @@ class HBasket
      * Set hProducts
      *
      * @param \AppBundle\Entity\HProducts $hProducts
+     *
      * @return HBasket
      */
     public function setHProducts(\AppBundle\Entity\HProducts $hProducts = null)
@@ -91,10 +101,26 @@ class HBasket
     /**
      * Get hProducts
      *
-     * @return \AppBundle\Entity\HProducts 
+     * @return \AppBundle\Entity\HProducts
      */
     public function getHProducts()
     {
         return $this->hProducts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

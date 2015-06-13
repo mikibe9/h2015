@@ -114,7 +114,7 @@ class DefaultController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         /** @var HBasketRepository $basketRepo */
         $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
-        $basketProducts = $basketRepo->findAll();
+        $basketProducts = $basketRepo->findBy(array('status' => HBasket::STATUS_ACTIVE));
         $results        = array();
 
         if (count($basketProducts) > 0) {
@@ -135,6 +135,7 @@ class DefaultController extends Controller
                     ),
                     "quantity" => $basketProduct->getQuantity()
                 );
+                $totalPrice                = $basketProduct->getQuantity();
             }
 
         }
@@ -193,6 +194,56 @@ class DefaultController extends Controller
         }
     }
 
+    public function addToBasketAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HBasketRepository $basketRepo */
+        $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
+        $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+        if ($basket instanceof HBasket) {
+            $basket->setQuantity($basket->getQuantity() + 1);
+        } else {
+            /** @var HProductsRepository $productsRepo */
+            $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+            /** @var HProducts $product */
+            $product = $productsRepo->find($productId);
+
+            $basket = new HBasket();
+            $basket->setHProducts($product);
+            $basket->setQuantity(1);
+        }
+        $entityManager->persist($basket);
+        $entityManager->flush();
+
+        return new JsonResponse($basket);
+    }
+
+    public function removeFromBasketAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+
+        /** @var HBasketRepository $basketRepo */
+        $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
+        $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+
+        if ($basket instanceof HBasket) {
+            if (($basket->getQuantity() - 1) == 0) {
+                $basket->setStatus(HBasket::STATUS_DELETED);
+            } else {
+                $basket->setQuantity($basket->getQuantity() - 1);
+            }
+            $entityManager->persist($basket);
+            $entityManager->flush();
+        }
+
+        return new JsonResponse($basket);
+    }
+
     public function offersAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -208,6 +259,7 @@ class DefaultController extends Controller
         if (count($offersWishlist) > 0) {
             /** @var HWishlist $offer */
             foreach ($offersWishlist as $offer) {
+                $products[]            = $offer->getHProducts()->getId();
                 $results['products'][] = array(
                     "id"                    => $offer->getHProducts()->getId(),
                     "name"                  => $offer->getHProducts()->getName(),
@@ -222,7 +274,28 @@ class DefaultController extends Controller
 
         }
 
-        $results['num_rows'] = count($wishlistRepo->findAll());
+        /** @var HBasketRepository $basketRepo */
+        $basketRepo   = $entityManager->getRepository(HBasket::REPOSITORY);
+        $offersBasket = $basketRepo->getAllProductsExcept($products);
+
+        if (count($offersBasket) > 0) {
+            /** @var HWishlist $offer */
+            foreach ($offersBasket as $offer) {
+                $results['products'][] = array(
+                    "id"                    => $offer->getHProducts()->getId(),
+                    "name"                  => $offer->getHProducts()->getName(),
+                    "brand"                 => $offer->getHProducts()->getHBrands()->getName(),
+                    "category"              => $offer->getHProducts()->getHCategories()->getName(),
+                    "price"                 => $offer->getHProducts()->getPrice(),
+                    "discount"              => $offer->getHProducts()->getDiscount(),
+                    "deliveryEstimatedCost" => $offer->getHProducts()->getDeliveryEstimatedCost(),
+                    "status"                => $offer->getHProducts()->getStatus()
+                );
+            }
+
+        }
+
+        $results['num_rows'] = (count($wishlistRepo->findAll()) + count($offersBasket));
 
         $isJsonP = $request->get('callback');
 
