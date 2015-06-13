@@ -150,4 +150,16 @@ class DefaultController extends Controller
 
         return new JsonResponse($results);
     }
+
+    public function addToBasketAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HBasketRepository $basketRepo */
+        $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
+    }
+
+    public function removeFromBasketAction(Request $request)
+    {
+        //TODO
+    }
 }

@@ -9,3 +9,21 @@ h2015_wishlist:
     defaults: { _controller: AppBundle:Default:wishlist}
     options:
       expose: true
+
+h2015_list_basket:
+      path: /list-basket
+      defaults: { _controller: AppBundle:Default:listBasket}
+      options:
+        expose: true
+
+h2015_add_to_basket:
+  path: /add-to-basket/{product_id}
+  defaults: { _controller: AppBundle:Default:addToBasket}
+  options:
+    expose: true
+
+h2015_remove_from_basket:
+  path: /remove-from-basket/{product_id}
+  defaults: { _controller: AppBundle:Default:addToBasket}
+  options:
+    expose: true
