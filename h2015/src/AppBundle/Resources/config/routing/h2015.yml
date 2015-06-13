@@ -21,3 +21,9 @@ h2015_wishlist_remove:
     defaults: { _controller: AppBundle:Default:wishlistRemove}
     options:
       expose: true
+
+h2015_offers:
+    path: /offers
+    defaults: { _controller: AppBundle:Default:offers}
+    options:
+      expose: true

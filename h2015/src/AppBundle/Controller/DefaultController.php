@@ -9,7 +9,6 @@ use AppBundle\Repository\HBasketRepository;
 use AppBundle\Repository\HProductsRepository;
 use AppBundle\Repository\HWishlistRepository;
 use Doctrine\ORM\EntityManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -188,8 +187,52 @@ class DefaultController extends Controller
         $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
         $wish         = $wishlistRepo->findOneBy(array('hProducts' => $productId));
         if ($wish instanceof HWishlist) {
-            $entityManager->remove($wish);
+            $wish->setStatus('deleted');
+            $entityManager->persist($wish);
             $entityManager->flush();
         }
+    }
+
+    public function offersAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $filters             = $request->query;
+        $results['products'] = array();
+
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo   = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $offersWishlist = $wishlistRepo->findAll();
+
+
+        if (count($offersWishlist) > 0) {
+            /** @var HWishlist $offer */
+            foreach ($offersWishlist as $offer) {
+                $results['products'][] = array(
+                    "id"                    => $offer->getHProducts()->getId(),
+                    "name"                  => $offer->getHProducts()->getName(),
+                    "brand"                 => $offer->getHProducts()->getHBrands()->getName(),
+                    "category"              => $offer->getHProducts()->getHCategories()->getName(),
+                    "price"                 => $offer->getHProducts()->getPrice(),
+                    "discount"              => $offer->getHProducts()->getDiscount(),
+                    "deliveryEstimatedCost" => $offer->getHProducts()->getDeliveryEstimatedCost(),
+                    "status"                => $offer->getHProducts()->getStatus()
+                );
+            }
+
+        }
+
+        $results['num_rows'] = count($wishlistRepo->findAll());
+
+        $isJsonP = $request->get('callback');
+
+
+        if ($isJsonP) {
+
+            echo $isJsonP . '(' . json_encode($results) . ');';
+            die;
+        }
+
+        return new JsonResponse($results);
     }
 }
