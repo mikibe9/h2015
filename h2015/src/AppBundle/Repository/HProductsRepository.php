@@ -11,9 +11,9 @@ class HProductsRepository extends EntityRepository
 
     public function getAllProductsByFilters(ParameterBag $filters)
     {
-        $page  = 1;
-        $limit = 50;
-        $start = 0;
+        $page  = intval($filters->get('page'));
+        $limit = intval($filters->get('limit'));
+        $start = intval($filters->get('start'));
 
         $qb = $this->createQueryBuilder('p');
 
@@ -22,11 +22,10 @@ class HProductsRepository extends EntityRepository
             $qb->where($qb->expr()->like('p.name', $qb->expr()->literal("%" . $search . "%")));
         }
 
-        if (isset($filters)) {
-            $page  = intval($filters->get('page'));
-            $limit = intval($filters->get('limit'));
-            $start = intval($filters->get('start'));
-
+        if (empty($page) && empty($limit) && empty($start)) {
+            $page  = 1;
+            $limit = 50;
+            $start = 0;
         }
 
         $qb->setFirstResult(($page - 1) * $limit);

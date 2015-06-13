@@ -31,7 +31,6 @@ class DefaultController extends Controller
         $filters      = $request->query;
         $products     = $productsRepo->getAllProductsByFilters($filters);
         $results      = array();
-
         if (count($products) > 0) {
             /** @var HProducts $product */
             foreach ($products as $product) {
@@ -47,6 +46,8 @@ class DefaultController extends Controller
                 );
             }
 
+        } else {
+            $results['products'] = array();
         }
         $results['num_rows'] = count($productsRepo->findAll());
 
@@ -63,12 +64,49 @@ class DefaultController extends Controller
 
     }
 
-    public function  wishlistAction()
+    public function  wishlistAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $filters       = $request->query;
         /** @var HWishlistRepository $wishlistRepo */
         $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $wishes       = $wishlistRepo->getAllProductsForWishlist($filters);
 
+        if (count($wishes) > 0) {
+            /** @var HWishlist $wish */
+            foreach ($wishes as $key => $wish) {
+                $results['wishlist'][] = array(
+                    "id"                    => $wish->getId(),
+                    "estimatedPurchase"     => $wish->getEstimatedPurchase(),
+                    "order"                 => $wish->getOrder(),
+                    "product_id"            => $wish->getHProducts()->getId(),
+                    "name"                  => $wish->getHProducts()->getName(),
+                    "brand"                 => $wish->getHProducts()->getHBrands()->getName(),
+                    "category"              => $wish->getHProducts()->getHCategories()->getName(),
+                    "price"                 => $wish->getHProducts()->getPrice(),
+                    "discount"              => $wish->getHProducts()->getDiscount(),
+                    "deliveryEstimatedCost" => $wish->getHProducts()->getDeliveryEstimatedCost(),
+                    "status"                => $wish->getHProducts()->getStatus()
+                );
+            }
+
+        } else {
+            $results['wishlist']
+                = array();
+        }
+
+        $results['num_rows'] = count($wishlistRepo->findAll());
+
+        $isJsonP = $request->get('callback');
+
+
+        if ($isJsonP) {
+
+            echo $isJsonP . '(' . json_encode($results) . ');';
+            die;
+        }
+
+        return new JsonResponse($results);
     }
 
     public function listBasketAction(Request $request)
