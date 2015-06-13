@@ -13,6 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -23,6 +28,11 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function homepageAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -64,6 +74,11 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function  wishlistAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -109,6 +124,11 @@ class DefaultController extends Controller
         return new JsonResponse($results);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function listBasketAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -116,6 +136,7 @@ class DefaultController extends Controller
         $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
         $basketProducts = $basketRepo->findBy(array('status' => HBasket::STATUS_ACTIVE));
         $results        = array();
+        $totalPrice = 0;
 
         if (count($basketProducts) > 0) {
             /** @var HBasket $basketProduct */
@@ -135,7 +156,7 @@ class DefaultController extends Controller
                     ),
                     "quantity" => $basketProduct->getQuantity()
                 );
-                $totalPrice                = $basketProduct->getQuantity();
+                $totalPrice += ($basketProduct->getQuantity() * $product->getPrice());
             }
 
         }
@@ -152,6 +173,11 @@ class DefaultController extends Controller
         return new JsonResponse($results);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
     public function wishlistAddAction(Request $request)
     {
         $productId = $request->request->get('product_id');
@@ -179,6 +205,9 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     */
     public function wishlistRemoveAction(Request $request)
     {
         $productId = $request->request->get('product_id');
@@ -194,35 +223,52 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function addToBasketAction(Request $request)
     {
-        $productId = $request->request->get('product_id');
+        $productId = $request->get('product_id');
+
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
+
         /** @var HBasketRepository $basketRepo */
         $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
+
         $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+
         if ($basket instanceof HBasket) {
             $basket->setQuantity($basket->getQuantity() + 1);
         } else {
+
             /** @var HProductsRepository $productsRepo */
             $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+
             /** @var HProducts $product */
             $product = $productsRepo->find($productId);
 
             $basket = new HBasket();
             $basket->setHProducts($product);
+            $basket->setStatus(HBasket::STATUS_ACTIVE);
             $basket->setQuantity(1);
         }
         $entityManager->persist($basket);
         $entityManager->flush();
 
-        return new JsonResponse($basket);
+        return new JsonResponse($basket->getQuantity());
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function removeFromBasketAction(Request $request)
     {
-        $productId = $request->request->get('product_id');
+        $productId = $request->get('product_id');
 
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
@@ -232,18 +278,25 @@ class DefaultController extends Controller
         $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
 
         if ($basket instanceof HBasket) {
-            if (($basket->getQuantity() - 1) == 0) {
+            if (($basket->getQuantity() - 1) <= 0) {
                 $basket->setStatus(HBasket::STATUS_DELETED);
+                $basket->setQuantity(0);
             } else {
                 $basket->setQuantity($basket->getQuantity() - 1);
             }
+
             $entityManager->persist($basket);
             $entityManager->flush();
         }
 
-        return new JsonResponse($basket);
+        return new JsonResponse($basket->getQuantity());
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function offersAction(Request $request)
     {
         /** @var EntityManager $entityManager */
