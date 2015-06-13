@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * HWishlist
  *
  * @ORM\Table(name="h_wishlist", indexes={@ORM\Index(name="fk_h_wishlist_h_products1_idx", columns={"h_products_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\HWishlistRepository")
  */
 class HWishlist
 {
@@ -41,12 +41,19 @@ class HWishlist
     /**
      * @var \HProducts
      *
-     * @ORM\ManyToOne(targetEntity="HProducts")
+     * @ORM\OneToOne(targetEntity="HProducts")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="h_products_id", referencedColumnName="id")
      * })
      */
     private $hProducts;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", nullable=false)
+     */
+    private $status;
 
 
 
@@ -127,5 +134,29 @@ class HWishlist
     public function getHProducts()
     {
         return $this->hProducts;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return HProducts
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
