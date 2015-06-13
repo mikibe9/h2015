@@ -246,56 +246,34 @@ class DefaultController extends Controller
 
     public function offersAction(Request $request)
     {
+        /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
 
         $filters             = $request->query;
         $results['products'] = array();
 
-        /** @var HWishlistRepository $wishlistRepo */
-        $wishlistRepo   = $entityManager->getRepository(HWishlist::REPOSITORY);
-        $offersWishlist = $wishlistRepo->findAll();
-
-
-        if (count($offersWishlist) > 0) {
-            /** @var HWishlist $offer */
-            foreach ($offersWishlist as $offer) {
-                $products[]            = $offer->getHProducts()->getId();
+        /** @var HProductsRepository $productsRepo */
+        $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+        $products     = $productsRepo->getAllProductsOffers($filters,$entityManager);
+        if (count($products) > 0) {
+            /** @var HProducts $product */
+            foreach ($products as $product) {
                 $results['products'][] = array(
-                    "id"                    => $offer->getHProducts()->getId(),
-                    "name"                  => $offer->getHProducts()->getName(),
-                    "brand"                 => $offer->getHProducts()->getHBrands()->getName(),
-                    "category"              => $offer->getHProducts()->getHCategories()->getName(),
-                    "price"                 => $offer->getHProducts()->getPrice(),
-                    "discount"              => $offer->getHProducts()->getDiscount(),
-                    "deliveryEstimatedCost" => $offer->getHProducts()->getDeliveryEstimatedCost(),
-                    "status"                => $offer->getHProducts()->getStatus()
+                    "id"                    => $product->getId(),
+                    "name"                  => $product->getName(),
+//                    "brand"                 => $product->getHBrands()->getName(),
+//                    "category"              => $product->getHCategories()->getName(),
+                    "price"                 => $product->getPrice(),
+                    "discount"              => $product->getDiscount(),
+                    "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
+                    "status"                => $product->getStatus()
                 );
             }
 
+        } else {
+            $results['products'] = array();
         }
-
-        /** @var HBasketRepository $basketRepo */
-        $basketRepo   = $entityManager->getRepository(HBasket::REPOSITORY);
-        $offersBasket = $basketRepo->getAllProductsExcept($products);
-
-        if (count($offersBasket) > 0) {
-            /** @var HWishlist $offer */
-            foreach ($offersBasket as $offer) {
-                $results['products'][] = array(
-                    "id"                    => $offer->getHProducts()->getId(),
-                    "name"                  => $offer->getHProducts()->getName(),
-                    "brand"                 => $offer->getHProducts()->getHBrands()->getName(),
-                    "category"              => $offer->getHProducts()->getHCategories()->getName(),
-                    "price"                 => $offer->getHProducts()->getPrice(),
-                    "discount"              => $offer->getHProducts()->getDiscount(),
-                    "deliveryEstimatedCost" => $offer->getHProducts()->getDeliveryEstimatedCost(),
-                    "status"                => $offer->getHProducts()->getStatus()
-                );
-            }
-
-        }
-
-        $results['num_rows'] = (count($wishlistRepo->findAll()) + count($offersBasket));
+        $results['num_rows'] = count($products);
 
         $isJsonP = $request->get('callback');
 
