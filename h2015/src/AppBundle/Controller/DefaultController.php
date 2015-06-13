@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\HProducts;
+use AppBundle\Entity\HWishlist;
+use AppBundle\Repository\HWishlistRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +24,7 @@ class DefaultController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         /** @var \HProductsRepository $productsRepo */
-        $productsRepo = $entityManager->getRepository('AppBundle:HProducts');
+        $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
         $filters      = $request->query;
         $products     = $productsRepo->getAllProductsByFilters($filters);
         $results      = array();
@@ -39,12 +41,24 @@ class DefaultController extends Controller
                 "status"                => $product->getStatus()
             );
         }
+        $results['num_rows'] = count($productsRepo->findAll());
+        $isJsonP = $request->get('callback');
+
+
+        if ($isJsonP) {
+
+            echo $isJsonP . '(' . json_encode($results) . ');';die;
+        }
 
         return new JsonResponse($results);
 
     }
 
-    public  function  wishlistAction(){
+    public function  wishlistAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
 
     }
 }
