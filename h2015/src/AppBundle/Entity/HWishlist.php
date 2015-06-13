@@ -27,7 +27,7 @@ class HWishlist
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="integer", nullable=true)
+     * @ORM\Column(name="`order`", type="integer", nullable=true)
      */
     private $order;
 

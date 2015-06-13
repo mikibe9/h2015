@@ -9,3 +9,15 @@ h2015_wishlist:
     defaults: { _controller: AppBundle:Default:wishlist}
     options:
       expose: true
+
+h2015_wishlist_add:
+    path: /wishlist-add
+    defaults: { _controller: AppBundle:Default:wishlistAdd}
+    options:
+      expose: true
+
+h2015_wishlist_remove:
+    path: /wishlist-remove
+    defaults: { _controller: AppBundle:Default:wishlistRemove}
+    options:
+      expose: true

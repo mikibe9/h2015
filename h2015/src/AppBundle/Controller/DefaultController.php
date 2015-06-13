@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\HProducts;
 use AppBundle\Entity\HWishlist;
+use AppBundle\Repository\HProductsRepository;
 use AppBundle\Repository\HWishlistRepository;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -104,5 +106,46 @@ class DefaultController extends Controller
         }
 
         return new JsonResponse($results);
+    }
+
+    public function wishlistAddAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $wish         = $wishlistRepo->findBy(array('hProducts' => $productId));
+        if ($wish instanceof HWishlist) {
+            return true;
+        } else {
+            /** @var HProductsRepository $productsRepo */
+            $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+            /** @var HProducts $product */
+            $product = $productsRepo->find($productId);
+            $wish    = new HWishlist();
+            $wish->setOrder(0);
+            $wish->setHProducts($product);
+            $wish->setEstimatedPurchase("");
+            $wish->setStatus('active');
+
+            $entityManager->persist($wish);
+            $entityManager->flush();
+        }
+
+    }
+
+    public function wishlistRemoveAction(Request $request)
+    {
+        $productId = $request->request->get('product_id');
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var HWishlistRepository $wishlistRepo */
+        $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
+        $wish         = $wishlistRepo->findOneBy(array('hProducts' => $productId));
+        if ($wish instanceof HWishlist) {
+            $entityManager->remove($wish);
+            $entityManager->flush();
+        }
     }
 }
