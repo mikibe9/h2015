@@ -136,7 +136,9 @@ class DefaultController extends Controller
         $basketRepo     = $entityManager->getRepository(HBasket::REPOSITORY);
         $basketProducts = $basketRepo->findBy(array('status' => HBasket::STATUS_ACTIVE));
         $results        = array();
-        $totalPrice = 0;
+        $totalPrice     = 0;
+        $totalQuantity  = 0;
+        $magicDiscount  = 0;
 
         if (count($basketProducts) > 0) {
             /** @var HBasket $basketProduct */
@@ -144,7 +146,7 @@ class DefaultController extends Controller
                 $product                   = $basketProduct->getHProducts();
                 $results['basket_items'][] = array(
                     "id"       => $basketProduct->getId(),
-                    "product"  => array(
+                    "products" => array(
                         "id"                    => $product->getId(),
                         "name"                  => $product->getName(),
                         "brand"                 => $product->getHBrands()->getName(),
@@ -156,9 +158,13 @@ class DefaultController extends Controller
                     ),
                     "quantity" => $basketProduct->getQuantity()
                 );
-                $totalPrice += ($basketProduct->getQuantity() * $product->getPrice());
+                $totalQuantity += $basketProduct->getQuantity();
+                $magicDiscount += $basketProduct->getHProducts()->getDeliveryEstimatedCost() * $basketProduct->getQuantity();
+                $totalPrice += ($basketProduct->getQuantity() * ($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100));
             }
-
+            $results['magic_discount'] = round(($magicDiscount - $magicDiscount / $totalQuantity) , 2);
+            $results['total_price'] = floor($totalPrice) + 0.99;
+            $results['magic_price'] = floor($totalPrice) + 0.99 - $results['magic_discount'];
         }
 
         $isJsonP = $request->get('callback');
@@ -252,9 +258,9 @@ class DefaultController extends Controller
 
             $basket = new HBasket();
             $basket->setHProducts($product);
-            $basket->setStatus(HBasket::STATUS_ACTIVE);
             $basket->setQuantity(1);
         }
+        $basket->setStatus(HBasket::STATUS_ACTIVE);
         $entityManager->persist($basket);
         $entityManager->flush();
 
