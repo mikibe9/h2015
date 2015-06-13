@@ -43,4 +43,8 @@ class DefaultController extends Controller
         return new JsonResponse($results);
 
     }
+
+    public  function  wishlistAction(){
+
+    }
 }
