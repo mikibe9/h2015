@@ -28,26 +28,32 @@ class DefaultController extends Controller
         $filters      = $request->query;
         $products     = $productsRepo->getAllProductsByFilters($filters);
         $results      = array();
-        /** @var HProducts $product */
-        foreach ($products as $product) {
-            $results['products'][] = array(
-                "id"                    => $product->getId(),
-                "name"                  => $product->getName(),
-                "brand"                 => $product->getHBrands()->getName(),
-                "category"              => $product->getHCategories()->getName(),
-                "price"                 => $product->getPrice(),
-                "discount"              => $product->getDiscount(),
-                "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
-                "status"                => $product->getStatus()
-            );
+
+        if (count($products) > 0) {
+            /** @var HProducts $product */
+            foreach ($products as $product) {
+                $results['products'][] = array(
+                    "id"                    => $product->getId(),
+                    "name"                  => $product->getName(),
+                    "brand"                 => $product->getHBrands()->getName(),
+                    "category"              => $product->getHCategories()->getName(),
+                    "price"                 => $product->getPrice(),
+                    "discount"              => $product->getDiscount(),
+                    "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
+                    "status"                => $product->getStatus()
+                );
+            }
+
         }
         $results['num_rows'] = count($productsRepo->findAll());
+
         $isJsonP = $request->get('callback');
 
 
         if ($isJsonP) {
 
-            echo $isJsonP . '(' . json_encode($results) . ');';die;
+            echo $isJsonP . '(' . json_encode($results) . ');';
+            die;
         }
 
         return new JsonResponse($results);
