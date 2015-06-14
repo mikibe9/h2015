@@ -68,7 +68,7 @@ Ext.define('XMobile.controller.SearchProductsController', {
         }
     },
     searchItemTap: function(view, index, target, record, event) {
-        console.log('Search Item tapped:');
+        /*console.log('Search Item tapped:');
         console.log(view, index, target, record, event);
         //Ext.Msg.alert('', 'Produs selectat: ' + record.get('name'));
         var popup = Ext.create('Ext.Menu', {
@@ -98,7 +98,7 @@ Ext.define('XMobile.controller.SearchProductsController', {
                 }
             ]
         });
-        popup.show();
+        popup.show();*/
     },
     basketStoreLoad: function(a,b,c,d,e,h) {
         debugger;
