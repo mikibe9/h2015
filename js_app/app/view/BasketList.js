@@ -11,15 +11,15 @@ Ext.define('XMobile.view.BasketList', {
     xtype: 'basketlist',
     config: {
         title: 'Basket',
-        iconCls: 'add',
+        iconCls: 'basketIcon',
         //icon: '33x33.png',
         styleHtmlContent: true,
         scrollable: true,
         //infinite: true,
         store: {
             xtype:'basketstore',
-            storeId: 'basketStore',
-            autoLoad: true
+            storeId: 'basketStore'/*,
+            autoLoad: true*/
         },
         itemTpl:  new Ext.XTemplate(
             '<tpl if="totals">',
@@ -30,7 +30,7 @@ Ext.define('XMobile.view.BasketList', {
         ),
         listeners: {
             itemtap: function(view, index, target, record, event) {
-                if(!popup) {
+                if (!popup) {
                     var popup = Ext.create('Ext.Menu', {
                         fullscreen: true,
                         id: 'menu_b',
@@ -60,7 +60,7 @@ Ext.define('XMobile.view.BasketList', {
                                             {'Access-Control-Allow-Headers': 'X-Requested-With,content-type'},
                                             {'Access-Control-Allow-Credentials': true}
                                         ],
-                                        callback: function(options, success, response) {
+                                        callback: function (options, success, response) {
                                             console.log(response.responseText);
                                         }
                                     });
@@ -86,6 +86,15 @@ Ext.define('XMobile.view.BasketList', {
                 }
 
                 popup.show();
+            },
+            show: function() {
+                this.getStore().load();
+                /*if(!this.getStore().isLoaded()){
+                    this.getStore().load();
+                    debugger;
+                } else {
+                    debugger;
+                }*/
             }
         },
         items: [

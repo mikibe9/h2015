@@ -7,6 +7,8 @@ Ext.define('XMobile.model.WishlistItem', {
             { name: 'id', type: 'int' },
             { name: 'name', type: 'string' },
             { name: 'order', type: 'int' },
+            { name: 'price', type: 'int' },
+            { name: 'old_price', type: 'int' },
             { name: 'purchase_period', type: 'string' }
         ]
     }

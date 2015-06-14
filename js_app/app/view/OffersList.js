@@ -34,7 +34,7 @@ Ext.define('XMobile.view.OffersList', {
                 pullText: 'Trage pentru a reincarca'
             }
         ],
-        itemTpl: '{name}',
+        itemTpl: '{name} <br /> <div class="h_price_old" style="text-decoration: line-through">{old_price}.99 RON</div><div class="h_price">{price}.99 RON (-{discount} %)</div>',
         listeners: {
             select: function(view, record) {
                 Ext.Msg.alert('Selectie!', 'Ai selectat ' + record.get('name'));
