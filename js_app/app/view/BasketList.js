@@ -45,31 +45,20 @@ Ext.define('XMobile.view.BasketList', {
                             {
                                 xttype: 'button',
                                 text: 'Subtract 1',
-                                iconCls: 'subtract',
+                                iconCls: 'minus1',
                                 handler: function () {
                                     //debugger;
-                                    Ext.Ajax.request({
-                                        url: 'http://192.168.12.102:8080/h2015/remove-from-basket/' + record.data.id,
-                                        method: 'GET',
-                                        /*params: {
-                                         product_id: record.data.id
-                                         },*/
-                                        headers: [
-                                            {'Access-Control-Allow-Origin': 'http://localhost'},
-                                            {'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE'},
-                                            {'Access-Control-Allow-Headers': 'X-Requested-With,content-type'},
-                                            {'Access-Control-Allow-Credentials': true}
-                                        ],
-                                        callback: function (options, success, response) {
-                                            console.log(response.responseText);
+                                    Ext.data.JsonP.request
+                                    (
+                                        {
+                                            url: "http://192.168.12.185:8000/h2015/remove-from-basket/" + record.data.product_id,
+                                            callbackKey: "callback",
+                                            params: {
+                                                cucu: 'cucumucu'
+                                            }
                                         }
-                                    });
+                                    );
                                 }
-                            },
-                            {
-                                xttype: 'button',
-                                text: 'Remove',
-                                iconCls: 'star'
                             },
                             {
                                 xttype: 'button',

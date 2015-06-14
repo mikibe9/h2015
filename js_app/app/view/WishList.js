@@ -36,8 +36,61 @@ Ext.define('XMobile.view.WishList', {
         ],
         itemTpl: '{name}',
         listeners: {
-            select: function(view, record) {
-                Ext.Msg.alert('Selectie!', 'Ai selectat ' + record.get('name'));
+            itemtap: function(view, index, target, record, event) {
+                if (!popup) {
+                    var popup = Ext.create('Ext.Menu', {
+                        fullscreen: true,
+                        id: 'menu_w',
+                        modal: true,
+                        hidden: true,
+                        hiddenCls: 'x-item-hidden',
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 'auto',
+                        items: [
+                            {
+                                xttype: 'button',
+                                text: 'Remove',
+                                iconCls: 'minus',
+                                handler: function () {
+                                    //debugger;
+                                    Ext.data.JsonP.request
+                                    (
+                                        {
+                                            url: "http://192.168.12.102:8080/h2015/wishlist-remove/" + record.data.id,
+                                            callbackKey: "callback",
+                                            params: {
+                                                cucu: 'cucumucu'
+                                            }
+                                        }
+                                    );
+                                }
+                            },
+                            {
+                                xttype: 'button',
+                                text: 'Cancel',
+                                iconCls: 'arrow_down',
+                                handler: function (a, b, c) {
+                                    Ext.getCmp('menu_w').hide();
+                                    Ext.getCmp('menu_w').destroy();
+                                }
+                            }
+                        ]
+                    });
+                    Ext.getCmp('wishList').add(popup);
+                }
+
+                popup.show();
+            },
+            show: function() {
+                this.getStore().load();
+                /*if(!this.getStore().isLoaded()){
+                 this.getStore().load();
+                 debugger;
+                 } else {
+                 debugger;
+                 }*/
             }
         },
         items: [

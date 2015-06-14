@@ -18,7 +18,7 @@ Ext.define('XMobile.store.OffersStore', {
             type : 'jsonp',
             //url : 'http://sercer.com/tutorials/hackathon2015/search.php',
             //url : 'http://sercer.com/tutorials/hackathon2015/offers.php',
-            url : 'http://192.168.12.185:8000/h2015/offers',
+            url : 'http://192.168.12.102:8080/h2015/offers',
             reader : {
                 type : 'json',
                 rootProperty: 'products',
