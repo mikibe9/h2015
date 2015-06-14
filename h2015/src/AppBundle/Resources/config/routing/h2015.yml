@@ -29,13 +29,13 @@ h2015_remove_from_basket:
     expose: true
 
 h2015_wishlist_add:
-    path: /wishlist-add
+    path: /wishlist-add/{product_id}
     defaults: { _controller: AppBundle:Default:wishlistAdd}
     options:
       expose: true
 
 h2015_wishlist_remove:
-    path: /wishlist-remove
+    path: /wishlist-remove/{product_id}
     defaults: { _controller: AppBundle:Default:wishlistRemove}
     options:
       expose: true
