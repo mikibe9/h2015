@@ -143,8 +143,8 @@ class DefaultController extends Controller
         if (count($basketProducts) > 0) {
             /** @var HBasket $basketProduct */
             foreach ($basketProducts as $basketProduct) {
-                $product               = $basketProduct->getHProducts();
-                $priceDiscounted       = round($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100, 0) + 0.99;
+                $product                   = $basketProduct->getHProducts();
+                $priceDiscounted           = round($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100, 0) + 0.99;
                 $results['basket_items'][] = array(
                     "id"                    => $basketProduct->getId(),
                     "product_id"            => $product->getId(),
@@ -192,7 +192,7 @@ class DefaultController extends Controller
         $wishlistRepo = $entityManager->getRepository(HWishlist::REPOSITORY);
         $wish         = $wishlistRepo->findBy(array('hProducts' => $productId));
         if ($wish instanceof HWishlist) {
-            return true;
+            return new JsonResponse($wish->getId());
         } else {
             /** @var HProductsRepository $productsRepo */
             $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
@@ -207,6 +207,8 @@ class DefaultController extends Controller
             $entityManager->persist($wish);
             $entityManager->flush();
         }
+
+        return new JsonResponse($wish->getId());
 
     }
 
@@ -226,6 +228,8 @@ class DefaultController extends Controller
             $entityManager->persist($wish);
             $entityManager->flush();
         }
+
+        return new JsonResponse($wish->getId());
     }
 
     /**
@@ -243,7 +247,7 @@ class DefaultController extends Controller
         /** @var HBasketRepository $basketRepo */
         $basketRepo = $entityManager->getRepository(HBasket::REPOSITORY);
 
-        $basket     = $basketRepo->findOneBy(array('hProducts' => $productId));
+        $basket = $basketRepo->findOneBy(array('hProducts' => $productId));
 
         if ($basket instanceof HBasket) {
             $basket->setQuantity($basket->getQuantity() + 1);
@@ -312,15 +316,15 @@ class DefaultController extends Controller
 
         /** @var HProductsRepository $productsRepo */
         $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
-        $products     = $productsRepo->getAllProductsOffers($filters,$entityManager);
+        $products     = $productsRepo->getAllProductsOffers($filters, $entityManager);
         if (count($products) > 0) {
             /** @var HProducts $product */
             foreach ($products as $product) {
                 $results['products'][] = array(
                     "id"                    => $product->getId(),
                     "name"                  => $product->getName(),
-//                    "brand"                 => $product->getHBrands()->getName(),
-//                    "category"              => $product->getHCategories()->getName(),
+                    //                    "brand"                 => $product->getHBrands()->getName(),
+                    //                    "category"              => $product->getHCategories()->getName(),
                     "price"                 => $product->getPrice(),
                     "discount"              => $product->getDiscount(),
                     "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
