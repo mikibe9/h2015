@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="07098451-580f-4f9b-b4b4-25d7002d7768" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/BasketList.js" afterPath="$PROJECT_DIR$/app/view/BasketList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/store/BasketStore.js" afterPath="$PROJECT_DIR$/app/store/BasketStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../h2015/src/AppBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/../h2015/src/AppBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/store/OffersStore.js" afterPath="$PROJECT_DIR$/app/store/OffersStore.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/WishList.js" afterPath="$PROJECT_DIR$/app/view/WishList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/store/WishlistStore.js" afterPath="$PROJECT_DIR$/app/store/WishlistStore.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../h2015/app/console" afterPath="$PROJECT_DIR$/../h2015/app/console" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../h2015/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../h2015/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -46,6 +41,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/Main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="448" max-vertical-offset="1649">
+              <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FiltersStore.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/store/FiltersStore.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -56,21 +61,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FiltersTreeStore.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/store/FiltersTreeStore.js">
+      <file leaf-file-name="ProductSearchList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/ProductSearchList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="3145">
+              <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
+              <folding>
+                <marker date="1434271873832" expanded="true" signature="1148:1177" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OffersStore.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/store/OffersStore.js">
+      <file leaf-file-name="SearchProductsController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controller/SearchProductsController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+            <state vertical-scroll-proportion="-9.4827585" vertical-offset="558" max-vertical-offset="1428">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,28 +87,21 @@
         <entry file="file://$PROJECT_DIR$/app/store/ProductsStore.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1326">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="38x32Basket.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/icons/38x32Basket.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasketList.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BasketList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/view/BasketList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1955">
-              <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.3837472" vertical-offset="153" max-vertical-offset="2057">
+              <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
               <folding>
-                <marker date="1434269096508" expanded="true" signature="715:727" placeholder="..." />
-                <marker date="1434269096508" expanded="true" signature="772:786" placeholder="..." />
-                <marker date="1434269096508" expanded="true" signature="842:853" placeholder="..." />
+                <marker date="1434272799502" expanded="true" signature="866:878" placeholder="..." />
+                <marker date="1434272799502" expanded="true" signature="923:937" placeholder="..." />
+                <marker date="1434272799502" expanded="true" signature="993:1004" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -110,18 +110,8 @@
       <file leaf-file-name="WishList.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/WishList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="2414">
-              <caret line="54" column="47" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/css/app.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36597937" vertical-offset="6213" max-vertical-offset="129523">
-              <caret line="378" column="19" selection-start-line="378" selection-start-column="14" selection-end-line="378" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2380">
+              <caret line="33" column="10" selection-start-line="24" selection-start-column="8" selection-end-line="33" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -130,8 +120,18 @@
       <file leaf-file-name="WishlistStore.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/store/WishlistStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1326">
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WishlistItem.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/model/WishlistItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+              <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -149,12 +149,12 @@
         <option value="$PROJECT_DIR$/app/view/Main.js" />
         <option value="$PROJECT_DIR$/app/controller/SearchProductsController.js" />
         <option value="$PROJECT_DIR$/app/store/ProductsStore.js" />
-        <option value="$PROJECT_DIR$/app/view/ProductSearchList.js" />
         <option value="$PROJECT_DIR$/app/model/BasketItem.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/app/store/WishlistStore.js" />
         <option value="$PROJECT_DIR$/app/store/BasketStore.js" />
         <option value="$PROJECT_DIR$/app/store/OffersStore.js" />
+        <option value="$PROJECT_DIR$/app/view/ProductSearchList.js" />
         <option value="$PROJECT_DIR$/app/view/WishList.js" />
         <option value="$PROJECT_DIR$/app/view/BasketList.js" />
       </list>
@@ -330,6 +330,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XMobileJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -411,7 +429,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32900432" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
@@ -524,34 +542,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1649">
-          <caret line="38" column="31" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/model/BasketItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/SearchProductsController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="53" max-vertical-offset="1428">
-          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/ProductSearchList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="3145">
-          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -569,10 +563,42 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/FiltersTreeStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/OffersStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6213" max-vertical-offset="129523">
+          <caret line="378" column="19" selection-start-line="378" selection-start-column="14" selection-end-line="378" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/model/WishlistItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/WishlistStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1326">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -593,63 +619,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/FiltersTreeStore.js">
+    <entry file="file://$PROJECT_DIR$/app/controller/SearchProductsController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.4827585" vertical-offset="558" max-vertical-offset="1428">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/OffersStore.js">
+    <entry file="file://$PROJECT_DIR$/app/view/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="448" max-vertical-offset="1649">
+          <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/ProductSearchList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="3145">
+          <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
+          <folding>
+            <marker date="1434271873832" expanded="true" signature="1148:1177" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/store/ProductsStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1326">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/WishList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="2414">
-          <caret line="54" column="47" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2380">
+          <caret line="33" column="10" selection-start-line="24" selection-start-column="8" selection-end-line="33" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/BasketList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1955">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.3837472" vertical-offset="153" max-vertical-offset="2057">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
           <folding>
-            <marker date="1434269096508" expanded="true" signature="715:727" placeholder="..." />
-            <marker date="1434269096508" expanded="true" signature="772:786" placeholder="..." />
-            <marker date="1434269096508" expanded="true" signature="842:853" placeholder="..." />
+            <marker date="1434272799502" expanded="true" signature="866:878" placeholder="..." />
+            <marker date="1434272799502" expanded="true" signature="923:937" placeholder="..." />
+            <marker date="1434272799502" expanded="true" signature="993:1004" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/WishlistStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36597937" vertical-offset="6213" max-vertical-offset="129523">
-          <caret line="378" column="19" selection-start-line="378" selection-start-column="14" selection-end-line="378" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>

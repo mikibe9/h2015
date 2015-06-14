@@ -21,6 +21,12 @@ Ext.define('XMobile.view.BasketList', {
             storeId: 'basketStore'/*,
             autoLoad: true*/
         },
+        plugins: [
+            {
+                xclass: 'Ext.plugin.PullRefresh',
+                pullText: 'Pull to reload'
+            }
+        ],
         itemTpl:  new Ext.XTemplate(
             '<tpl if="totals">',
             '<b>Magic Discount</b> <p style="color:green;">{magic_discount}</p> Total Price <p style="color:darkred;"><s>{total_price}</s></p> <b>Magic Price</b> <p style="color:green"">{magic_price}</p>',
@@ -44,14 +50,14 @@ Ext.define('XMobile.view.BasketList', {
                         items: [
                             {
                                 xttype: 'button',
-                                text: 'Subtract 1',
+                                text: 'Remove 1',
                                 iconCls: 'minus1',
                                 handler: function () {
                                     //debugger;
                                     Ext.data.JsonP.request
                                     (
                                         {
-                                            url: "http://192.168.12.185:8000/h2015/remove-from-basket/" + record.data.product_id,
+                                            url: "http://192.168.12.102:8080/h2015/remove-from-basket/" + record.data.product_id,
                                             callbackKey: "callback",
                                             params: {
                                                 cucu: 'cucumucu'

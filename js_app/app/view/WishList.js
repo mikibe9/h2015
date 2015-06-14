@@ -25,13 +25,11 @@ Ext.define('XMobile.view.WishList', {
         plugins: [
             {
                 xclass: 'Ext.plugin.ListPaging',
-                autoPaging: true,
-                loadMoreText: 'Se incarca...',
-                noMoreRecordsText: 'Nu mai exista rezultate'
+                autoPaging: true
             },
             {
                 xclass: 'Ext.plugin.PullRefresh',
-                pullText: 'Trage pentru a reincarca'
+                pullText: 'Pull to reload'
             }
         ],
         itemTpl: '{name}',
@@ -52,7 +50,7 @@ Ext.define('XMobile.view.WishList', {
                             {
                                 xttype: 'button',
                                 text: 'Remove',
-                                iconCls: 'minus',
+                                iconCls: 'remove',
                                 handler: function () {
                                     //debugger;
                                     Ext.data.JsonP.request
