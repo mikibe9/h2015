@@ -143,32 +143,31 @@ class DefaultController extends Controller
         if (count($basketProducts) > 0) {
             /** @var HBasket $basketProduct */
             foreach ($basketProducts as $basketProduct) {
-                $product                   = $basketProduct->getHProducts();
+                $product               = $basketProduct->getHProducts();
+                $priceDiscounted       = round($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100, 0) + 0.99;
                 $results['basket_items'][] = array(
-                    "id"       => $basketProduct->getId(),
-                    "products" => array(
-                        "id"                    => $product->getId(),
-                        "name"                  => $product->getName(),
-                        "brand"                 => $product->getHBrands()->getName(),
-                        "category"              => $product->getHCategories()->getName(),
-                        "price"                 => $product->getPrice(),
-                        "discount"              => $product->getDiscount(),
-                        "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
-                        "status"                => $product->getStatus()
-                    ),
-                    "quantity" => $basketProduct->getQuantity()
+                    "id"                    => $basketProduct->getId(),
+                    "product_id"            => $product->getId(),
+                    "name"                  => $product->getName(),
+                    "brand"                 => $product->getHBrands()->getName(),
+                    "category"              => $product->getHCategories()->getName(),
+                    "old_price"             => $product->getPrice() + 0.99,
+                    "price"                 => $priceDiscounted,
+                    "discount"              => $product->getDiscount(),
+                    "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
+                    "status"                => $product->getStatus(),
+                    "quantity"              => $basketProduct->getQuantity()
                 );
                 $totalQuantity += $basketProduct->getQuantity();
                 $magicDiscount += $basketProduct->getHProducts()->getDeliveryEstimatedCost() * $basketProduct->getQuantity();
-                $totalPrice += ($basketProduct->getQuantity() * ($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100));
+                $totalPrice += ($basketProduct->getQuantity() * $priceDiscounted);
             }
-            $results['magic_discount'] = round(($magicDiscount - $magicDiscount / $totalQuantity) , 2);
-            $results['total_price'] = floor($totalPrice) + 0.99;
-            $results['magic_price'] = floor($totalPrice) + 0.99 - $results['magic_discount'];
+            $results['magic_discount'] = round(($magicDiscount - $magicDiscount / $totalQuantity), 2);
+            $results['total_price']    = floor($totalPrice) + 0.99;
+            $results['magic_price']    = floor($totalPrice) + 0.99 - $results['magic_discount'];
         }
 
         $isJsonP = $request->get('callback');
-
 
         if ($isJsonP) {
 
