@@ -28,7 +28,7 @@ class HWishlistRepository extends EntityRepository
             $start = 0;
         }
 
-        $qb->setParameter('status', 'active');
+        $qb->setParameter('status', 'ACTIVE');
         $qb->setFirstResult(($page - 1) * $limit);
         $qb->setMaxResults($limit);
 
