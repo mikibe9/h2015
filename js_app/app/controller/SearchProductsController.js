@@ -70,35 +70,8 @@ Ext.define('XMobile.controller.SearchProductsController', {
     searchItemTap: function(view, index, target, record, event) {
         /*console.log('Search Item tapped:');
         console.log(view, index, target, record, event);
-        //Ext.Msg.alert('', 'Produs selectat: ' + record.get('name'));
-        var popup = Ext.create('Ext.Menu', {
-            hideOnMaskTap: true,
-            fullscreen: true,
-            modal: true,
-            items: [
-                {
-                    xttype: 'button',
-                    text: 'Add to basket',
-                    iconCls: 'add'
-                },
-                {
-                    xttype: 'button',
-                    text: 'Add to wishlist',
-                    iconCls: 'star'
-                },
-                {
-                    xttype: 'button',
-                    text: 'Create filter',
-                    iconCls: 'settings'
-                },
-                {
-                    xttype: 'button',
-                    text: 'Share to a friend',
-                    iconCls: 'user'
-                }
-            ]
-        });
-        popup.show();*/
+        //Ext.Msg.alert('', 'Produs selectat: ' + record.get('name'));*/
+
     },
     basketStoreLoad: function(a,b,c,d,e,h) {
         debugger;
