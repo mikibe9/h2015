@@ -9,7 +9,8 @@ Ext.define('XMobile.view.ProductSearchList', {
         'Ext.data.proxy.Rest',
         'Ext.field.Search',
         'Ext.plugin.ListPaging',
-        'Ext.plugin.PullRefresh'
+        'Ext.plugin.PullRefresh',
+        'Ext.form.Panel'
     ],
     xtype: 'productsearchlist',
     config: {
@@ -35,7 +36,7 @@ Ext.define('XMobile.view.ProductSearchList', {
                 pullText: 'Trage pentru a reincarca'
             }
         ],
-        itemTpl: '{name} <br /> <div class="h_price_old" style="text-decoration: line-through">{price}.99 RON</div><div class="h_price">{price}.99 RON</div>',
+        itemTpl: '{name} <br /> <div class="h_price_old" style="text-decoration: line-through">{old_price}.99 RON</div><div class="h_price">{price}.99 RON (-{discount} %)</div>',
         listeners: {
             itemtap: function(view, index, target, record, event) {
                 if(!popup) {
@@ -55,7 +56,37 @@ Ext.define('XMobile.view.ProductSearchList', {
                                 text: 'Add to basket',
                                 iconCls: 'add',
                                 handler: function () {
-                                    debugger;
+                                    Ext.data.JsonP.request
+                                    (
+                                        {
+                                            url: "http://192.168.12.185:8000/h2015/add-to-basket/" + record.data.id,
+                                            callbackKey: "callback",
+                                            params: {
+                                                cucu: 'cucumucu'
+                                            }
+                                        }
+                                    );
+
+                                    /*var form = Ext.create('Ext.form.Panel', {
+                                        title: 'Basic Form',
+                                        renderTo: Ext.getBody(),
+                                        bodyPadding: 5,
+                                        width: 350,
+                                        method: 'POST',
+                                        // Any configuration items here will be automatically passed along to
+                                        // the Ext.form.Basic instance when it gets created.
+
+                                        // The form will submit an AJAX request to this URL when submitted
+                                        url: 'http://192.168.12.185:8000/h2015/add-to-basket',
+
+                                        items: [{
+                                            fieldLabel: 'Product id',
+                                            name: 'product_id',
+                                            value: record.data.id
+                                        }]
+                                    });*/
+                                    /*form.submit();*/
+                                    /*debugger;
                                     Ext.Ajax.request({
                                         url: 'http://192.168.12.185:8000/h2015/add-to-basket',
                                         method: 'POST',
@@ -65,13 +96,25 @@ Ext.define('XMobile.view.ProductSearchList', {
                                         callback: function(options, success, response) {
                                             console.log(response.responseText);
                                         }
-                                    });
+                                    });*/
                                 }
                             },
                             {
                                 xttype: 'button',
                                 text: 'Add to wishlist',
-                                iconCls: 'star'
+                                iconCls: 'star',
+                                handler: function () {
+                                    Ext.data.JsonP.request
+                                    (
+                                        {
+                                            url: "http://192.168.12.185:8000/h2015/wishlist-add/" + record.data.id,
+                                            callbackKey: "callback",
+                                            params: {
+                                                cucu: 'cucumucu'
+                                            }
+                                        }
+                                    );
+                                }
                             },
                             {
                                 xttype: 'button',
