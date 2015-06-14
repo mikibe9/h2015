@@ -55,13 +55,19 @@ Ext.define('XMobile.view.ProductSearchList', {
                                 text: 'Add to basket',
                                 iconCls: 'add',
                                 handler: function () {
-                                    debugger;
+                                    //debugger;
                                     Ext.Ajax.request({
-                                        url: 'http://192.168.12.185:8000/h2015/add-to-basket',
-                                        method: 'POST',
-                                        params: {
+                                        url: 'http://192.168.12.102:8080/h2015/add-to-basket/' + record.data.id,
+                                        method: 'GET',
+                                        /*params: {
                                             product_id: record.data.id
-                                        },
+                                        },*/
+                                        headers: [
+                                            {'Access-Control-Allow-Origin': 'http://localhost'},
+                                            {'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE'},
+                                            {'Access-Control-Allow-Headers': 'X-Requested-With,content-type'},
+                                            {'Access-Control-Allow-Credentials': true}
+                                        ],
                                         callback: function(options, success, response) {
                                             console.log(response.responseText);
                                         }

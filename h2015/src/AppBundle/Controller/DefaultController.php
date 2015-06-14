@@ -162,9 +162,12 @@ class DefaultController extends Controller
                 $magicDiscount += $basketProduct->getHProducts()->getDeliveryEstimatedCost() * $basketProduct->getQuantity();
                 $totalPrice += ($basketProduct->getQuantity() * $priceDiscounted);
             }
-            $results['magic_discount'] = round(($magicDiscount - $magicDiscount / $totalQuantity), 2);
-            $results['total_price']    = floor($totalPrice) + 0.99;
-            $results['magic_price']    = floor($totalPrice) + 0.99 - $results['magic_discount'];
+            $totalMagicDiscount = round(($magicDiscount - $magicDiscount / $totalQuantity), 2);
+            $results['basket_items'][] = array(
+                'magic_discount' => $totalMagicDiscount,
+                'total_price'    => floor($totalPrice) + 0.99,
+                'magic_price'    => floor($totalPrice) + 0.99 - $totalMagicDiscount
+            );
         }
 
         $isJsonP = $request->get('callback');
