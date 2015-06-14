@@ -45,3 +45,10 @@ h2015_offers:
     defaults: { _controller: AppBundle:Default:offers}
     options:
       expose: true
+
+js_app:
+    path: /js_app
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: "http://localhost/h2015/js_app"
+        permanent: true

@@ -185,7 +185,7 @@ class DefaultController extends Controller
      */
     public function wishlistAddAction(Request $request)
     {
-        $productId = $request->request->get('product_id');
+        $productId = $request->get('product_id');
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
         /** @var HWishlistRepository $wishlistRepo */
@@ -215,7 +215,7 @@ class DefaultController extends Controller
      */
     public function wishlistRemoveAction(Request $request)
     {
-        $productId = $request->request->get('product_id');
+        $productId = $request->get('product_id');
         /** @var EntityManager $entityManager */
         $entityManager = $this->getDoctrine()->getManager();
         /** @var HWishlistRepository $wishlistRepo */
