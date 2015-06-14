@@ -13,7 +13,11 @@ Ext.define('XMobile.model.BasketItem', {
             { name: 'old_price', type: 'string' },
             { name: 'price', type: 'string' },
             { name: 'deliveryEstimatedCost', type: 'string' },
-            { name: 'discount', type: 'int' }
+            { name: 'discount', type: 'int' },
+            { name: 'totals', type: 'boolean' },
+            { name: 'magic_discount', type: 'string' },
+            { name: 'total_price', type: 'string' },
+            { name: 'magic_price', type: 'string' }
         ]
     }
 });
