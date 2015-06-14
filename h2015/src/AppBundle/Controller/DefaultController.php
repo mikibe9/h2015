@@ -44,12 +44,14 @@ class DefaultController extends Controller
         if (count($products) > 0) {
             /** @var HProducts $product */
             foreach ($products as $product) {
+                $priceDiscounted       = round($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100, 0) + 0.99;
                 $results['products'][] = array(
                     "id"                    => $product->getId(),
                     "name"                  => $product->getName(),
                     "brand"                 => $product->getHBrands()->getName(),
                     "category"              => $product->getHCategories()->getName(),
-                    "price"                 => $product->getPrice(),
+                    "price"                 => $priceDiscounted,
+                    "old_price"             => $product->getPrice() + 0.99,
                     "discount"              => $product->getDiscount(),
                     "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
                     "status"                => $product->getStatus()
@@ -90,6 +92,10 @@ class DefaultController extends Controller
         if (count($wishes) > 0) {
             /** @var HWishlist $wish */
             foreach ($wishes as $key => $wish) {
+                $priceDiscounted
+                                       =
+                    round($wish->getHProducts()->getPrice() - $wish->getHProducts()->getPrice() * $wish->getHProducts()->getDiscount() / 100, 0)
+                    + 0.99;
                 $results['wishlist'][] = array(
                     "id"                    => $wish->getId(),
                     "estimatedPurchase"     => $wish->getEstimatedPurchase(),
@@ -98,7 +104,8 @@ class DefaultController extends Controller
                     "name"                  => $wish->getHProducts()->getName(),
                     "brand"                 => $wish->getHProducts()->getHBrands()->getName(),
                     "category"              => $wish->getHProducts()->getHCategories()->getName(),
-                    "price"                 => $wish->getHProducts()->getPrice(),
+                    "price"                 => $priceDiscounted,
+                    "old_price"             => $wish->getHProducts()->getPrice() + 0.99,
                     "discount"              => $wish->getHProducts()->getDiscount(),
                     "deliveryEstimatedCost" => $wish->getHProducts()->getDeliveryEstimatedCost(),
                     "status"                => $wish->getHProducts()->getStatus()
