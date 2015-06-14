@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>XMobile</title>
+    <style type="text/css">
+         /**
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: #1985D0
+        }
+
+        #appLoadingIndicator {
+            position: absolute;
+            top: 50%;
+            margin-top: -15px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+        }
+
+        #appLoadingIndicator > * {
+            background-color: #FFFFFF;
+            display: inline-block;
+            height: 30px;
+            -webkit-border-radius: 15px;
+            margin: 0 5px;
+            width: 30px;
+            opacity: 0.8;
+        }
+
+        @-webkit-keyframes appLoadingIndicator{
+            0% {
+                opacity: 0.8
+            }
+            50% {
+                opacity: 0
+            }
+            100% {
+                opacity: 0.8
+            }
+        }
+
+         .product-list {
+             float:left;
+             height:70px;
+             /*border: 1px solid red;*/
+             overflow: hidden;
+             width:100%;
+         }
+         .product-list .product-image-list {
+             float:left;
+             width:80px;
+             height: 80px;
+         }
+         .product-list .product-image-list  img{
+            width: 40px;
+            height:  40px;
+         }
+         .product-list .name {
+             float:left;
+             font-size: 11px;
+             color:#005596;
+             margin: 13px 5px 10px 5px;
+             font-weight: bold;
+             font-family: Arial, Helvetica, sans-serif;
+             line-height: 15px;
+         }
+         .product-list .old-price {
+             text-decoration: line-through;
+             font-size: 11px;
+             color:red;
+             font-weight: bold;
+             font-family: Arial, Helvetica, sans-serif;
+             float:right;
+
+         }
+         .product-list .new-price {
+             font-size: 12px;
+             color:green;
+             font-weight: bold;
+             font-family: Arial, Helvetica, sans-serif;
+             float:right;
+
+         }
+         .product-list .discount {
+             float:left;
+             font-size: 10px;
+             color:green;
+             font-weight: bold;
+             font-family: Arial, Helvetica, sans-serif;
+             margin: 0 0 0 10px;
+         }
+         /*.x-item-selected {
+             background: none!important;
+             background-color: #ECEcEC!important;
+             text-shadow: #FFFFFF!important;
+             border-top-color: #CCCCCC!important;
+         }*/
+         .title-bar-emag {
+             background: url('/xmobile/js/app_v1/resources/icons/100x29.png') 2px 4px no-repeat !important;
+             /*background: url('http://sercer.com/tutorials/hackathon2015/resources/icons/100x29.png') 2px 4px no-repeat !important;*/
+         }
+    </style>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
+</head>
+<body>
+    <div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
