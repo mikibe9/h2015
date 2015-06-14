@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\HBasket;
+use AppBundle\Entity\HCategories;
 use AppBundle\Entity\HProducts;
 use AppBundle\Entity\HWishlist;
 use AppBundle\Repository\HBasketRepository;
@@ -169,12 +170,9 @@ class DefaultController extends Controller
                 $magicDiscount += $basketProduct->getHProducts()->getDeliveryEstimatedCost() * $basketProduct->getQuantity();
                 $totalPrice += ($basketProduct->getQuantity() * $priceDiscounted);
             }
-            $totalMagicDiscount = round(($magicDiscount - $magicDiscount / $totalQuantity), 2);
-            $results['basket_items'][] = array(
-                'magic_discount' => $totalMagicDiscount,
-                'total_price'    => floor($totalPrice) + 0.99,
-                'magic_price'    => floor($totalPrice) + 0.99 - $totalMagicDiscount
-            );
+            $results['magic_discount'] = round(($magicDiscount - $magicDiscount / $totalQuantity), 2);
+            $results['total_price']    = floor($totalPrice) + 0.99;
+            $results['magic_price']    = floor($totalPrice) + 0.99 - $results['magic_discount'];
         }
 
         $isJsonP = $request->get('callback');
@@ -326,16 +324,19 @@ class DefaultController extends Controller
 
         /** @var HProductsRepository $productsRepo */
         $productsRepo = $entityManager->getRepository(HProducts::REPOSITORY);
+
         $products     = $productsRepo->getAllProductsOffers($filters, $entityManager);
         if (count($products) > 0) {
             /** @var HProducts $product */
             foreach ($products as $product) {
+                $priceDiscounted       = round($product->getPrice() - $product->getPrice() * $product->getDiscount() / 100, 0) + 0.99;
                 $results['products'][] = array(
                     "id"                    => $product->getId(),
                     "name"                  => $product->getName(),
-                    //                    "brand"                 => $product->getHBrands()->getName(),
-                    //                    "category"              => $product->getHCategories()->getName(),
-                    "price"                 => $product->getPrice(),
+//                    "brand"                 => $product->getHBrands()->getName(),
+//                    "category"              => $entityManager->getRepository(HCategories::REPOSITORY)->find($product->getHCategories()->getId()),
+                    "old_price"             => $product->getPrice() + 0.99,
+                    "price"                 => $priceDiscounted,
                     "discount"              => $product->getDiscount(),
                     "deliveryEstimatedCost" => $product->getDeliveryEstimatedCost(),
                     "status"                => $product->getStatus()
