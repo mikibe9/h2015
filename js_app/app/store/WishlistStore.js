@@ -18,7 +18,7 @@ Ext.define('XMobile.store.WishlistStore', {
             type : 'jsonp',
             //url : 'http://sercer.com/tutorials/hackathon2015/wishlist.php',
             //url : 'http://sercer.com/tutorials/hackathon2015/wishlist.php',
-            url: 'http://192.168.12.185:8000/h2015/wishlist',
+            url: 'http://192.168.12.102:8080/h2015/wishlist',
             reader : {
                 type : 'json',
                 rootProperty: 'wishlist',

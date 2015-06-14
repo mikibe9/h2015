@@ -9,7 +9,7 @@ Ext.define('XMobile.store.BasketStore', {
             type : 'jsonp',
             //url : 'http://sercer.com/tutorials/hackathon2015/search.php',
             //url : 'http://sercer.com/tutorials/hackathon2015/basket.php',
-            url: 'http://192.168.12.185:8000/h2015/list-basket',
+            url: 'http://192.168.12.102:8080/h2015/list-basket',
             //url : 'http://127.0.0.1:8000/h2015/',
             reader : {
                 type : 'json',
