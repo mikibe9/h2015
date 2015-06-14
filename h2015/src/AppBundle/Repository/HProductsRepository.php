@@ -49,8 +49,8 @@ class HProductsRepository extends EntityRepository
         $rsm->addFieldResult('p', 'price', 'price');
         $rsm->addFieldResult('p', 'discount', 'discount');
 //        $rsm->addFieldResult('p', 'delivery_estimated_cost', 'delivery_estimated_cost');
-//        $rsm->addFieldResult('p', 'h_brands_id', 'h_brands_id');
 //        $rsm->addFieldResult('p', 'h_categories_id', 'h_categories_id');
+//        $rsm->addFieldResult('p', 'h_brands_id', 'h_brands_id');
         $rsm->addFieldResult('p', 'status', 'status');
 
         $queryS
