@@ -241,7 +241,7 @@ class DefaultController extends Controller
             $entityManager->flush();
         }
 
-        return new JsonResponse($wish->getId());
+        return new JsonResponse($productId);
     }
 
     /**
